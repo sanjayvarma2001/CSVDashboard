@@ -1,6 +1,9 @@
 Malladi Sanjay Varma
+
 Software Engineer Fresher | Full-Stack & Python Developer
+
 Andhra Pradesh, India | +91 8466954267 | [Email Me](mailto:sanjayvarma.m47137@gmail.com)
+
 LinkedIn: linkedin.com/in/sanjayvarmamalladi|GitHub: github.com/sanjayvarma2001
 
 SUMMARY
