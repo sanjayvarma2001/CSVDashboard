@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: csvdashboard-api
+    env: docker
+    dockerfilePath: ./Dockerfile
+    autoDeploy: true
+    envVars:
+      - key: DATABASE_URL
+        scope: run
+        sync: false
+      - key: GEMINI_API_KEY
+        scope: run
+        sync: false
+      - key: PORT
+        value: 8000
