@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+sqlalchemy
+sqlalchemy_utils
+psycopg2-binary
+python-dotenv
+pandas
+google-generativeai
+python-multipart
+pydantic
+requests
