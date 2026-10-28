@@ -26,7 +26,7 @@ Lightweight CSV insights dashboard (frontend + FastAPI backend).
   This project is a CSV Dashboard — a web app that lets users upload CSVs, preview the table, generate short AI insights (trends, outliers, recommendations), save reports, view recent reports, and export results.
 
   ## Project Snapshot
-  - Chosen problem: CSV Dashboard (quicker to complete than Task Generator)
+  - Chosen problem: CSV Dashboard
   - Tech stack: Python (FastAPI), PostgreSQL, SQLAlchemy, Pandas, Google Gemini (generative AI), Next.js (React), Recharts
 
   ## Project Definition
