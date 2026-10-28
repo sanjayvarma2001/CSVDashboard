@@ -23,7 +23,7 @@ Lightweight CSV insights dashboard (frontend + FastAPI backend).
 
   ## Summary
 
-  This project is a CSV Dashboard (Problem B) — a web app that lets users upload CSVs, preview the table, generate short AI insights (trends, outliers, recommendations), save reports, view recent reports, and export results.
+  This project is a CSV Dashboard — a web app that lets users upload CSVs, preview the table, generate short AI insights (trends, outliers, recommendations), save reports, view recent reports, and export results.
 
   ## Project Snapshot
   - Chosen problem: CSV Dashboard (quicker to complete than Task Generator)
