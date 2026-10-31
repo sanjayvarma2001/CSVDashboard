@@ -1,7 +1,10 @@
-from sqlalchemy import Column, Integer, String, Text, DateTime
-from sqlalchemy.dialects.postgresql import JSONB
-from db import Base
 from datetime import datetime
+
+from sqlalchemy import Column, DateTime, Integer, String, Text
+from sqlalchemy.dialects.postgresql import JSONB
+
+from db.database import Base
+
 
 class Report(Base):
     __tablename__ = "reports"

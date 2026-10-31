@@ -1,15 +1,10 @@
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.ext.declarative import declarative_base
-import os
-from dotenv import load_dotenv
-from sqlalchemy_utils import database_exists, create_database
+from sqlalchemy.orm import declarative_base, sessionmaker
+from sqlalchemy_utils import create_database, database_exists
 
-load_dotenv()
+from core.config import DATABASE_URL
 
-SQLAlchemy_URL = os.getenv("DATABASE_URL")
-
-engine = create_engine(SQLAlchemy_URL)
+engine = create_engine(DATABASE_URL)
 
 if not database_exists(engine.url):
     create_database(engine.url)
