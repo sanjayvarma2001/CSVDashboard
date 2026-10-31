@@ -1,3 +1,4 @@
+import logging
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -5,10 +6,13 @@ from core.config import FRONTEND_ORIGINS
 from db.database import Base, engine
 from routes import chat, health, reports
 
+logger = logging.getLogger("uvicorn.error")
+logger.info("CORS allowed origins: %s", FRONTEND_ORIGINS)
+
 app = FastAPI()
 
 app.add_middleware(CORSMiddleware,
-                   allow_origins=[FRONTEND_ORIGINS],
+                   allow_origins=FRONTEND_ORIGINS,
                    allow_credentials=True,
                    allow_methods = ["*"],
                    allow_headers = ["*"],)

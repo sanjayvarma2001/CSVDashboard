@@ -4,10 +4,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-def _require(api_key:str) -> str:
-    value = os.getenv(api_key)
+def _require(name:str) -> str:
+    value = os.getenv(name)
     if not value:
-        return "ValueError: No API Key"
+        raise RuntimeError(f"Missing required environment variable: {name}")
     return value        
 
 def _normalize_db_url(url: str) ->str:
