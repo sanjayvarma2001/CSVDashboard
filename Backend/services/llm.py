@@ -17,21 +17,32 @@ Statistics: {stats_summary}"""
         print(f"Gemini Error: {e}")
         return "AI analysis currently unavailable, but your data was saved."
 
+def _clean_user_text(text:str)->str:
+    if "User Question:" in text:
+           text = text.split("User Question:", 1)[1]
+           text = text.split("Reply instructions:", 1)[0]
+    return text.strip()
+
 def _to_content(entry: dict)->dict:
-    parts = [p if isinstance(p,dict) else {"text":p} for p in entry["parts"]]
+    raw_entry = entry.get("parts") or entry.get("part") or []
+    parts = []
+    for p in raw_entry:
+        text = p.get("text","") if isinstance(p, dict) else p
+        if entry["role"] == "user":
+            text = _clean_user_text(text)
+        parts.append({"text": text})
     return {"role":entry["role"], "parts": parts}
 
-def chat_about_report(summary_stats: str,history: list,message: str) -> tuple(str,list):
-    chat = client.chats.create(model=MODEL_NAME, history= [_to_content(e) for e in (history or [])],)
-    prompt = f"""You are a concise data analysis assistant.
-
-Context (dataset statistics): {summary_stats}
-
-User Question: {message}
-
-Reply instructions: Start with a single, short paragraph (one sentence, max 25 words) that directly answers the user. If the user requests details, provide at most 2 short bullet points (each ≤ 15 words). Always be brief and actionable.
-"""
-    response = chat.send_message(prompt)
+def chat_about_report(summary_stats: str,history: list,message: str) -> tuple[str,list]:
+    chat = client.chats.create(model=MODEL_NAME, 
+                               config={"system_instruction": (
+                                    "You are a concise data analysis assistant.\n\n"
+                                    f"Dataset statistics: {summary_stats}\n\n"
+                                    "Reply with one short sentence (max 25 words). If the user asks for details, "
+                                    "add at most 2 short bullet points (each 15 words or fewer)."
+                                )}, 
+                                history= [_to_content(e) for e in (history or [])],)
+    response = chat.send_message(message)
     new_history = [
         {"role": c.role, "parts": [{"text": p.text} for p in c.parts if p.text] }
         for c in chat.get_history()
